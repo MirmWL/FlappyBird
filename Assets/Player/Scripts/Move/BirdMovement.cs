@@ -1,18 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
+[Serializable]
 public class BirdMovement 
 {
-    private readonly Rigidbody2D _rigidbody2D;
+    [SerializeField]
+    private Rigidbody2D _rigidbody2D;
     
-    private readonly float _speed;
-    private readonly float _jumpForce;
+    [SerializeField]
+    private float _speed;
     
-    public BirdMovement(Rigidbody2D rb, float speed, float jumpForce)
-    {
-        _speed = speed;
-        _jumpForce = jumpForce;
-        _rigidbody2D = rb;
-    }
+    [SerializeField]
+    private float _jumpForce;
 
     public void Move()
     {

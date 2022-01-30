@@ -5,9 +5,9 @@ public class Pipe : MonoBehaviour
 {
     public event Action<Pipe> Out;
     
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(col.TryGetComponent(out Border _))
+        if(collider.TryGetComponent(out Border _))
             Out?.Invoke(this);
     }
 }

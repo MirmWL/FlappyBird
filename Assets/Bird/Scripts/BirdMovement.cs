@@ -5,7 +5,7 @@ using UnityEngine;
 public class BirdMovement 
 {
     [SerializeField]
-    private Rigidbody2D _rigidbody2D;
+    private Rigidbody2D _rigidBody;
     
     [SerializeField]
     private float _speed;
@@ -18,12 +18,12 @@ public class BirdMovement
         if(Input.GetKeyDown(KeyCode.Mouse0))
             Jump();
 
-        _rigidbody2D.velocity = new Vector2(_speed, _rigidbody2D.velocity.y);
+        _rigidBody.velocity = new Vector2(_speed, _rigidBody.velocity.y);
     }
 
     private void Jump()
     {
-        _rigidbody2D.velocity = Vector2.zero;   
-        _rigidbody2D.AddForce(Vector2.up * _jumpForce);
+        _rigidBody.velocity = Vector2.zero;   
+        _rigidBody.AddForce(Vector2.up * _jumpForce);
     }
 }

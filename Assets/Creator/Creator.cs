@@ -6,7 +6,7 @@ public class Creator<T> where T : MonoBehaviour
 {
     public event Action<T> ObjectCreated;
     private readonly T _prefab;
-    private readonly Stack<T> _items;
+    private readonly List<T> _items;
     private readonly int _count;
     private readonly Transform _container;
 
@@ -15,7 +15,7 @@ public class Creator<T> where T : MonoBehaviour
         _count = count;
         _prefab = prefab;
         _container = container;
-        _items = new Stack<T>();
+        _items = new List<T>();
     }
 
     public IReadOnlyCollection<T> Items => _items;
@@ -29,7 +29,7 @@ public class Creator<T> where T : MonoBehaviour
     private void CreateObject()
     {
         var item = UnityEngine.Object.Instantiate(_prefab, _container);
-        _items.Push(item);
+        _items.Remove(item);
         ObjectCreated?.Invoke(item);
     }
 }

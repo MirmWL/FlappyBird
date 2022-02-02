@@ -13,8 +13,9 @@ public class RandomPositionGenerator
 
     public Vector2 GetPosition()
     {
-        return new Vector2(
-            Random.Range(_startRange.x, _endRange.x),
-            Random.Range(_startRange.y, _endRange.y));
+        var randomX = Random.Range(_startRange.x, _endRange.x);
+        var randomY = Random.Range(_startRange.y, _endRange.y);
+        
+        return new Vector2(randomX, randomY);
     }
 }

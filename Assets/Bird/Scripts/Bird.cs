@@ -7,11 +7,6 @@ public class Bird : MonoBehaviour
     public event Action CollideWithPipe;
     public event Action CollideWithScorePoint;
     
-    [SerializeField]
-    private BirdMovement _movement;
-
-    private void Update() => _movement.Move();
-    
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.TryGetComponent(out Pipe _))

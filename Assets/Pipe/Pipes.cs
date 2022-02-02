@@ -12,21 +12,21 @@ public class Pipes : MonoBehaviour
     private void Awake()
     {
         _pool = new Pool<Pipe>(_prefab, _startItemCount, _container, _spread);
-        _pool.ObjectCreated += SubscribePipe;
+        _pool.ObjectCreated += SubscribeToPipe;
         _pool.CreateInitial();
     }
 
     private void OnEnable()
     {
-        _pool.ObjectCreated += SubscribePipe;
+        _pool.ObjectCreated += SubscribeToPipe;
     }
 
     private void OnDisable()
     {
-        _pool.ObjectCreated -= SubscribePipe;
+        _pool.ObjectCreated -= SubscribeToPipe;
     }
 
-    private void SubscribePipe(Pipe pipe)
+    private void SubscribeToPipe(Pipe pipe)
     {
         pipe.Out += _pool.Replace;  
     }

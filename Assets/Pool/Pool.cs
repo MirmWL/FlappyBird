@@ -40,9 +40,9 @@ public class Pool<T> where T : MonoBehaviour
 
     public void Replace(T item)
     {
-        var rightestPipePosition = GetRightestPosition();
-        var minSpread = new Vector2(rightestPipePosition.x + _spread.xMin, _spread.yMin);
-        var maxSpread = new Vector2(rightestPipePosition.x + _spread.xMax, _spread.yMax);
+        var rightestPosition = GetRightestPosition();
+        var minSpread = new Vector2(rightestPosition.x + _spread.xMin, _spread.yMin);
+        var maxSpread = new Vector2(rightestPosition.x + _spread.xMax, _spread.yMax);
             
         var randomPosition = new RandomPositionGenerator(minSpread, maxSpread).GetPosition();
         item.transform.position = randomPosition;

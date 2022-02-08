@@ -2,26 +2,29 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-using TMPro;
-
 public class Game : MonoBehaviour
 {
     [SerializeField] private Bird _bird;
     [SerializeField] private Button _restartButton;
-    [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private TextMeshProUGUI _highScoreText;
+    
+    [SerializeField] private ScoreView _scoreView;
+    [SerializeField] private ScoreView _highScoreView;
     
     private Score _score;
+    private Score _highScore;
+
     private SaveSystem _saveSystem;
     
     private void Awake()
     {
-        _saveSystem = new SaveSystem();
-        
         _score = new Score();
-        new ScoreView(_scoreText, _highScoreText, _score);
+        _scoreView.Init(_score);
         
-        _saveSystem.Load(_score);
+        _highScore = new Score();
+        _highScoreView.Init(_highScore);
+
+        _saveSystem = new SaveSystem(_highScore);
+        _saveSystem.Load();
     }
     
     private void OnEnable()
@@ -38,9 +41,20 @@ public class Game : MonoBehaviour
         UnsubscribeRestartButton();
     }
 
+    private void SetHighScore(int value)
+    {
+        if (_highScore.Value < value)
+            _highScore.Value = value;
+    }
+
+    private void AddScore()
+    {
+        _score.Value++;
+    }
+    
     private void SubscribeToScore()
     {
-        _score.HighScoreChanged += _saveSystem.Save;
+        _score.Changed += SetHighScore;
     }
 
     private void SubscribeRestartButton()
@@ -51,12 +65,13 @@ public class Game : MonoBehaviour
     private void SubscribeToBird()
     {
         _bird.CollideWithPipe += Restart;
-        _bird.CollideWithScorePoint += _score.AddScore;
+        _bird.CollideWithPipe += _saveSystem.SaveToPlayerPrefs;
+        _bird.CollideWithScorePoint += AddScore;
     }
 
     private void UnsubscribeFromScore()
     {
-        _score.HighScoreChanged -= _saveSystem.Save;
+        _score.Changed -= SetHighScore;
     }
     
     private void UnsubscribeRestartButton()
@@ -67,7 +82,8 @@ public class Game : MonoBehaviour
     private void UnsubscribeFromBird()
     {
         _bird.CollideWithPipe -= Restart;
-        _bird.CollideWithScorePoint -= _score.AddScore;
+        _bird.CollideWithPipe -= _saveSystem.SaveToPlayerPrefs;
+        _bird.CollideWithScorePoint -= AddScore;
     }
     
     private void Restart()

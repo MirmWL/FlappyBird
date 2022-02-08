@@ -2,15 +2,21 @@
 
 public class SaveSystem
 {
-    private const string SAVE_HIGH_SCORE = "highScore";
-
-    public void Save(int score)
+    private const string HighScoreSaveKey = "highScore";
+    private readonly Score _score;
+    
+    public SaveSystem(Score score)
     {
-        PlayerPrefs.SetInt(SAVE_HIGH_SCORE, score);        
+        _score = score;
     }
 
-    public void Load(Score score)
+    public void SaveToPlayerPrefs()
     {
-        score.HighScore = PlayerPrefs.GetInt(SAVE_HIGH_SCORE);
+        PlayerPrefs.SetInt(HighScoreSaveKey, _score.Value);        
+    }
+
+    public void Load()
+    {
+         _score.Value = PlayerPrefs.GetInt(HighScoreSaveKey);
     }
 }

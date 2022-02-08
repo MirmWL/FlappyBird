@@ -26,6 +26,6 @@ public class BirdMovement : MonoBehaviour
     private void Jump()
     {
         _rigidBody.velocity = Vector2.zero;   
-        _rigidBody.AddForce(Vector2.up * _jumpForce);
+        _rigidBody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
 }

@@ -903,6 +903,7 @@ GameObject:
   - component: {fileID: 1076855192}
   - component: {fileID: 1076855194}
   - component: {fileID: 1076855193}
+  - component: {fileID: 1076855195}
   m_Layer: 5
   m_Name: HighScore
   m_TagString: Untagged
@@ -1026,6 +1027,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076855191}
   m_CullTransparentMesh: 1
+--- !u!114 &1076855195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076855191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fdde1de48685949b2ef44cebc4fccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreText: {fileID: 1076855193}
 --- !u!1 &1222215271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,11 +1229,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1329170454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5a2e3ef8f114eaf8d4574d818c078f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 13fdde1de48685949b2ef44cebc4fccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 1329170457}
-  _currentScore: 0
 --- !u!1 &1673070350
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,8 +1346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bird: {fileID: 519120282}
   _restartButton: {fileID: 1944729696}
-  _scoreText: {fileID: 1329170457}
-  _highScoreText: {fileID: 1076855193}
+  _scoreView: {fileID: 1329170459}
+  _highScoreView: {fileID: 1076855195}
 --- !u!4 &1828271903
 Transform:
   m_ObjectHideFlags: 0

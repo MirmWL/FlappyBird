@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -12,16 +11,16 @@ public class Pool<T> where T : MonoBehaviour
     private readonly List<T> _items;
     private readonly int _count;
     private readonly Transform _container;
-    private readonly Rect _spread;
-    
-    public Pool(T prefab, int count, Transform container, Rect spread)
+
+    public Pool(T prefab, int count, Transform container)
     {
-        _spread = spread;
         _count = count;
         _prefab = prefab;
         _container = container;
         _items = new List<T>();
     }
+
+    public IReadOnlyList<T> Items => _items;
 
     public void CreateInitial()
     {
@@ -36,27 +35,5 @@ public class Pool<T> where T : MonoBehaviour
         _items.Add(item);
         
         ObjectCreated?.Invoke(item);
-    }
-
-    public void Replace(T item)
-    {
-        var rightestPosition = GetRightestPosition();
-        var minSpread = new Vector2(rightestPosition.x + _spread.xMin, _spread.yMin);
-        var maxSpread = new Vector2(rightestPosition.x + _spread.xMax, _spread.yMax);
-            
-        var randomPosition = new RandomPositionGenerator(minSpread, maxSpread).GetPosition();
-        item.transform.position = randomPosition;
-    }
-    
-    private Vector3 GetRightestPosition()
-    {
-        float maxXPosition = _items.
-            Select(u => u.transform.position.x).
-            Max();
-        
-        T rightestItem = _items.
-            FirstOrDefault(s => s.transform.position.x == maxXPosition);
-        
-        return rightestItem.transform.position;
     }
 }

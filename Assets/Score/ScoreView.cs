@@ -1,26 +1,17 @@
+using UnityEngine;
 using TMPro;
 
-public class ScoreView
+public class ScoreView : MonoBehaviour
 {
-    private readonly TextMeshProUGUI _scoreText;
-    private readonly TextMeshProUGUI _highScoreText;
-    
-    public ScoreView(TextMeshProUGUI scoreText, TextMeshProUGUI highScoreText, Score score)
+    [SerializeField] private TextMeshProUGUI _scoreText;
+
+    public void Init(Score score)
     {
-        _highScoreText = highScoreText;
-        _scoreText = scoreText;
-        
-        score.ScoreChanged += UpdateScoreView;
-        score.HighScoreChanged += UpdateHighScoreView;
+        score.Changed += UpdateView;
     }
     
-    private void UpdateScoreView(int score)
+    private void UpdateView(int score)
     {
         _scoreText.text = score.ToString();
-    }
-
-    private void UpdateHighScoreView(int highScore)
-    {
-        _highScoreText.text = highScore.ToString();
     }
 }

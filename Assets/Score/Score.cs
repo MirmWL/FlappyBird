@@ -2,36 +2,15 @@
 
 public class Score
 {
-    public event Action<int> ScoreChanged;
-    public event Action<int> HighScoreChanged;
-    
-    private int _currentScore;
-    private int _highScore;
-
-    public int HighScore
+    public event Action<int> Changed;
+    private int _score;
+    public int Value
     {
-        set
+        get => _score;
+        set 
         {
-            HighScoreChanged?.Invoke(value);
-            _highScore = value;
+            Changed?.Invoke(value);
+            _score = value;
         }
-    }
-    
-    private int CurrentScore
-    {
-        get => _currentScore;
-        set
-        {
-            ScoreChanged?.Invoke(value);
-            _currentScore = value;
-        }
-    }
-
-    public void AddScore()
-    {
-        CurrentScore++;
-
-        if (_currentScore > _highScore)
-            HighScore = _currentScore;
     }
 }
